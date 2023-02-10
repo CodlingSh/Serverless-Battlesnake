@@ -2,11 +2,11 @@
     functions = "functions"
 
 [[redirects]]
-    from = "/api"
+    from = "/"
     to = "/.netlify/functions/info"
     status = 200
 
 [[redirects]]
-    from = "/api/*"
+    from = "/*"
     to = "/.netlify/functions/:splat"
     status = 200
