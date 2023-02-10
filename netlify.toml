@@ -2,7 +2,7 @@
     functions = "functions"
 
 [[redirects]]
-    from = "/"
+    from = "/api"
     to = "/.netlify/functions/info"
     status = 200
 
