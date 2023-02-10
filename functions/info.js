@@ -4,8 +4,8 @@ exports.handler = async event => {
             "apiversion": "1",
             "author": "codlinsh",
             "color": "#a9b4c2",
-            "head": "caffine",
-            "tail": "bolt",
+            "head": "safe",
+            "tail": "curled",
             "version": "0.0.1-beta"
         })
     } catch (error) {
