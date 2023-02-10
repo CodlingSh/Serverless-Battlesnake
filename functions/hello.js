@@ -1,8 +1,8 @@
 exports.handler = async event => {
     try {
-        return resizeBy({ message: 'ok'})
+        return res({ message: 'ok'})
     } catch (error) {
-        return resizeBy({ error }, 500)
+        return res({ error }, 500)
     }
 }
 
