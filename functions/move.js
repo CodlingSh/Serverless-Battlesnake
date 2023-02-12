@@ -66,9 +66,9 @@ const avoidWalls = (sharktopus, possibleMoves, boardInfo) => {
     moves = possibleMoves;
 
     if (sharktopus.head["x"] == 0) moves = moves.filter(e => e != "left"); 
-    if (sharktopus.head["x"] == boardInfo.width) moves = moves.filter(e => e != "right");
+    if (sharktopus.head["x"] == boardInfo.width - 1) moves = moves.filter(e => e != "right");
     if (sharktopus.head["y"] == 0) moves = moves.filter(e => e != "down"); 
-    if (sharktopus.head["y"] == boardInfo.height) moves = moves.filter(e => e != "up");
+    if (sharktopus.head["y"] == boardInfo.height - 1) moves = moves.filter(e => e != "up");
     
     return moves;
 }
