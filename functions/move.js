@@ -19,7 +19,7 @@ exports.handler = async event => {
         console.log(possibleMoves);
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});*/
     } catch (error) {
-        console.log(event.body);
+        console.log("ERROR!");
         return res({ error }, 500)
     }
 }
