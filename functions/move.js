@@ -3,18 +3,13 @@ exports.handler = async event => {
         const body = JSON.parse(event.body);
         const mySnake = body.you;
 
-        /*const gameBoard = drawBoard(body.board, mySnake);*/
+        const gameBoard = drawBoard(body.board, mySnake);
         let possibleMoves = ["up", "down", "left", "right"];
 
-        /*possibleMoves = avoidWalls(mySnake, possibleMoves, body.board);
+        possibleMoves = avoidWalls(mySnake, possibleMoves, body.board);
         possibleMoves = avoidObstacles(mySnake, possibleMoves, gameBoard);
-        // const game = JSON.parse(event.body.game);
-        // const turn = JSON.parse(event.body.game);
-        // const board = JSON.parse(event.body.game);
-        // const you = JSON.parse(event.body.you);
+    
         humanReadableBoard(gameBoard, mySnake);
-        
-        // return res({ligma: "balls"});*/
 
         console.log(possibleMoves);
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
