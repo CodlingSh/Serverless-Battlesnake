@@ -14,9 +14,9 @@ exports.handler = async event => {
         // const you = JSON.parse(event.body.you);
         humanReadableBoard(gameBoard, mySnake);
         
-        // return res({ligma: "balls"});
+        // return res({ligma: "balls"});*/
 
-        console.log(possibleMoves);*/
+        console.log(possibleMoves);
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
     } catch (error) {
         console.log("ERROR!");
