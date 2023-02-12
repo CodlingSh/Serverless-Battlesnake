@@ -6,7 +6,7 @@ exports.handler = async event => {
         /*const gameBoard = drawBoard(body.board, mySnake);*/
         let possibleMoves = ["up", "down", "left", "right"];
 
-        possibleMoves = avoidWalls(mySnake, possibleMoves, body.board);/*
+        /*possibleMoves = avoidWalls(mySnake, possibleMoves, body.board);
         possibleMoves = avoidObstacles(mySnake, possibleMoves, gameBoard);
         // const game = JSON.parse(event.body.game);
         // const turn = JSON.parse(event.body.game);
