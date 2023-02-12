@@ -14,7 +14,9 @@ exports.handler = async event => {
         console.log(possibleMoves);
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
     } catch (error) {
-        console.log(event.body);
+        const body = JSON.parse(event.body);
+
+        console.log(body.board.snakes[0].name);
         return res({ error }, 500)
     }
 }
@@ -30,7 +32,7 @@ const drawBoard = (boardInfo, sharktopus) => {
         }
     }
 
-    console.log(boardInfo.snakes[1]["body"][1]["x"]);
+    // console.log(boardInfo.snakes[1]["body"][1]["x"]);
 
     // Draw the food
     for (let i = 0; i < boardInfo.food.length; i++) {
@@ -76,7 +78,7 @@ const avoidWalls = (sharktopus, possibleMoves, boardInfo) => {
 const avoidObstacles = (sharktopus, possibleMoves, gameBoard) => {
     let moves = possibleMoves;
     let myHead = sharktopus.head;
-    let badSpots = ["h", "S", "x"];
+    let badSpots = ["h", "S", "x", "e"];
 
     console.log(myHead);
 
