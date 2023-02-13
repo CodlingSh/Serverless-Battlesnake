@@ -40,6 +40,8 @@ exports.handler = async event => {
 
         console.log(upMoves + " " + downMoves + " " + leftMoves + " " + rightMoves);*/
 
+        console.log(typeof(possibleMoves));
+        console.log(possibleMoves);
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
     } catch (error) {
         console.log(error);
