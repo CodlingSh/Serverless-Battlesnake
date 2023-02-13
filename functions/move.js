@@ -5,18 +5,44 @@ exports.handler = async event => {
 
         const gameBoard = drawBoard(body.board, mySnake);
         let possibleMoves = ["up", "down", "left", "right"];
+        let preferredMoves;
+
+        // Variables to help determine best possible path
+        let upMoves;
+        let downMoves;
+        let leftMoves;
+        let rightMoves;
+        let mostMoves;
 
         possibleMoves = avoidWalls(mySnake, possibleMoves, body.board);
         possibleMoves = avoidObstacles(mySnake, possibleMoves, gameBoard);
+        // possibleMoves = checkSpaces(mySnake, possibleMoves, gameBoard);
     
         humanReadableBoard(gameBoard, mySnake);
+        console.log("gameBoard is a " + typeof(gameBoard));
 
-        console.log(possibleMoves);
+        if (possibleMoves.includes("up")) {
+            upMoves = countPath(floodFill(possibleMoves, mySnake.head["y"] + 1, mySnake.head["x"]));
+            console.log(upMoves);
+        }
+        if (possibleMoves.includes("down")) {
+            downMoves = countPath(floodFill(possibleMoves, mySnake.head["y"] - 1, mySnake.head["x"]));
+            console.log(downMoves);
+        }
+        if (possibleMoves.includes("left")) {
+            leftMoves = countPath(floodFill(possibleMoves, mySnake.head["y"], mySnake.head["x"] + 1));
+            console.log(leftMoves);
+        }
+        if (possibleMoves.includes("right")) {
+            rightMoves = countPath(floodFill(possibleMoves, mySnake.head["y"], mySnake.head["x"] - 1));
+            console.log(rightMoves);
+        }
+
+        console.log(upMoves + " " + downMoves + " " + leftMoves + " " + rightMoves);
+
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
     } catch (error) {
-        const body = JSON.parse(event.body);
-
-        console.log(body.board.snakes[0].name);
+        console.log(error);
         return res({ error }, 500)
     }
 }
@@ -84,7 +110,7 @@ const avoidObstacles = (sharktopus, possibleMoves, gameBoard) => {
 
     // Check for objects above head
     if (moves.includes("up")) {
-        if (gameBoard[myHead["y"] + 1][myHead["x"]] == "S") {
+        if (badSpots.includes(gameBoard[myHead["y"] + 1][myHead["x"]])) {
             moves = moves.filter(e => e != "up");
         }
     }
@@ -111,6 +137,53 @@ const avoidObstacles = (sharktopus, possibleMoves, gameBoard) => {
     }
 
     return moves;
+}
+
+const floodFill = (gameBoard, sx, sy) => {
+    let badSpots = ["h", "S", "x", "e"];
+    // gameBoard = gameBoard.list;
+
+    console.log(typeof(gameBoard.list));
+
+    if (!badSpots.includes(gameBoard[sy][sx])) {
+        console.log("Can check!")
+        /*gameBoard[sy][sx] = "c";
+
+        // Check up
+        if (sy < gameBoard.length - 1) {
+            floodFill(gameBoard, sx, sy + 1, preferredMoves);
+        } 
+        // Check right
+        if (sx < gameBoard[sy].length - 1) {
+            floodFill(gameBoard, sx + 1, sy, preferredMoves);
+        }
+        // Check down
+        if (sy > 0) {
+            floodFill(gameBoard, sx, sy - 1, preferredMoves);
+        }
+        // Check left
+        if (sx > 0) {
+            floodFill(gameBoard, sx - 1, sy, preferredMoves);
+        }*/
+    }
+
+    console.log("Made it!");
+    return gameBoard;
+}
+
+const countPath = (gameBoard) => {
+    console.log("TEST!!!");
+    let count = 0;
+
+    for (let y = 0; y < gameBoard.length; y++) {
+        for (let x = 0; x < gameBoard[y].length; x++) {
+            if (gameBoard[y][x] == 6) {
+                count++
+            }
+        }
+    }
+
+    return count
 }
 
 function res(o, statusCode = 200) {
