@@ -21,7 +21,7 @@ exports.handler = async event => {
         humanReadableBoard(gameBoard, mySnake);
         console.log("gameBoard is a " + typeof(gameBoard));
 
-        if (possibleMoves.includes("up")) {
+        /*if (possibleMoves.includes("up")) {
             upMoves = countPath(floodFill(possibleMoves, mySnake.head["y"] + 1, mySnake.head["x"]));
             console.log(upMoves);
         }
@@ -38,7 +38,7 @@ exports.handler = async event => {
             console.log(rightMoves);
         }
 
-        console.log(upMoves + " " + downMoves + " " + leftMoves + " " + rightMoves);
+        console.log(upMoves + " " + downMoves + " " + leftMoves + " " + rightMoves);*/
 
         return res({move: possibleMoves[Math.floor(Math.random() * possibleMoves.length)]});
     } catch (error) {
